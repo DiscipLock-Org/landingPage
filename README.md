@@ -1,8 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Disciplock Landing Page
+
+A professional, conversion-optimized landing page for Disciplock - a focus and accountability app that helps users set limits on distracting apps and complete meaningful tasks before unlocking.
+
+## Features
+
+- **Modern UI/UX**: Professional design with smooth animations and micro-interactions
+- **Waitlist Form**: Comprehensive signup form collecting user information
+- **Supabase Integration**: Stores waitlist signups in Supabase database
+- **Email Notifications**: Sends thank-you emails via Resend when users sign up
+- **Responsive Design**: Fully responsive, mobile-first design
+- **Accessibility**: WCAG 2.1 AA compliant
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **Backend**: Supabase (database)
+- **Email**: Resend (transactional emails)
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Validation**: Zod
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ and npm/yarn/pnpm
+- A Supabase account and project
+- A Resend account and API key
+
+### Installation
+
+1. Clone the repository and install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+2. Set up environment variables:
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Resend Configuration
+RESEND_API_KEY=your_resend_api_key
+RESEND_FROM_EMAIL=Disciplock <noreply@yourdomain.com>
+```
+
+3. Set up Supabase database:
+
+Run the following SQL in your Supabase SQL editor to create the waitlist table:
+
+```sql
+CREATE TABLE waitlist (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  device_type TEXT NOT NULL CHECK (device_type IN ('ios', 'android')),
+  primary_goal TEXT,
+  accountability_interest TEXT,
+  referral_source TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX idx_waitlist_email ON waitlist(email);
+CREATE INDEX idx_waitlist_created_at ON waitlist(created_at);
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE waitlist ENABLE ROW LEVEL SECURITY;
+
+-- Create a policy that allows inserts (for the API)
+CREATE POLICY "Allow public inserts" ON waitlist
+  FOR INSERT
+  TO public
+  WITH CHECK (true);
+
+-- Create a policy that allows service role to read (for admin purposes)
+-- Note: This uses the service role key, not the anon key
+CREATE POLICY "Allow service role reads" ON waitlist
+  FOR SELECT
+  TO service_role
+  USING (true);
+```
+
+4. Configure Resend:
+
+- Sign up for a Resend account at https://resend.com
+- Get your API key from the dashboard
+- If you have a custom domain, verify it in Resend. Otherwise, you can use Resend's default domain for testing.
+
+5. Run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +106,98 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the landing page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+landingPage/
+├── app/
+│   ├── layout.tsx          # Root layout with metadata
+│   ├── page.tsx             # Main landing page
+│   ├── api/
+│   │   └── waitlist/
+│   │       └── route.ts     # API route for Supabase integration
+│   └── globals.css          # Global styles + Tailwind
+├── components/
+│   ├── Hero.tsx             # Hero section with headline
+│   ├── Features.tsx         # Key features showcase
+│   ├── WaitlistForm.tsx     # Signup form component
+│   ├── Logo.tsx             # Disciplock logo component
+│   └── ui/                  # Reusable UI components
+│       ├── Button.tsx
+│       ├── Input.tsx
+│       ├── Select.tsx
+│       └── RadioGroup.tsx
+├── lib/
+│   ├── supabase.ts          # Supabase client configuration
+│   └── resend.ts            # Resend email client configuration
+├── emails/
+│   └── thank-you.tsx        # Thank-you email template
+├── package.json
+├── tailwind.config.ts
+└── tsconfig.json
+```
 
-## Learn More
+## Waitlist Form Fields
 
-To learn more about Next.js, take a look at the following resources:
+### Required Fields
+- **Name**: User's full name
+- **Email**: Email address (validated)
+- **Device Type**: iOS or Android
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Optional Fields
+- **Primary Goal**: Why they want to use Disciplock (faith, discipline, doom-scrolling, or custom)
+- **Accountability Partner Interest**: Interest level in the accountability partner feature
+- **Referral Source**: How they heard about the app
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Email Integration
 
-## Deploy on Vercel
+When a user successfully signs up for the waitlist, they automatically receive a thank-you email via Resend. The email includes:
+- Personalized greeting
+- Confirmation of their signup
+- Information about what to expect
+- Overview of Disciplock's features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Add your environment variables in Vercel's dashboard
+4. Deploy!
+
+### Other Platforms
+
+The app can be deployed to any platform that supports Next.js:
+- Netlify
+- AWS Amplify
+- Railway
+- Render
+
+Make sure to set all environment variables in your deployment platform.
+
+## Customization
+
+### Colors
+
+Edit `tailwind.config.ts` to customize the color scheme. The current theme uses:
+- Primary: Blue shades (trust, security)
+- Accent: Gray/silver shades (from logo)
+
+### Content
+
+- Update hero section text in `components/Hero.tsx`
+- Modify features in `components/Features.tsx`
+- Customize email template in `emails/thank-you.tsx`
+
+## License
+
+This project is private and proprietary.
+
+## Support
+
+For questions or issues, please contact the development team.
