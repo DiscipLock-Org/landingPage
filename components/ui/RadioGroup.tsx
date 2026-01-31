@@ -12,6 +12,7 @@ interface RadioGroupProps {
   value?: string;
   onChange: (value: string) => void;
   error?: string;
+  helperText?: string;
   required?: boolean;
 }
 
@@ -22,6 +23,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   value,
   onChange,
   error,
+  helperText,
   required,
 }) => {
   return (
@@ -59,6 +61,9 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
       </div>
       {error && (
         <p className="mt-1 text-sm text-red-600">{error}</p>
+      )}
+      {helperText && !error && (
+        <p className="mt-1 text-sm text-gray-500">{helperText}</p>
       )}
     </div>
   );

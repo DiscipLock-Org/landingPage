@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Users, BookOpen, TrendingUp } from 'lucide-react';
+import { PhoneMockup } from './PhoneMockup';
 
 const features = [
   {
@@ -36,8 +37,10 @@ const features = [
 ];
 
 export const Features: React.FC = () => {
+  const scrollRef = useRef<HTMLElement>(null);
+
   return (
-    <section className="py-24 bg-white">
+    <section ref={scrollRef} className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,8 +58,11 @@ export const Features: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => {
+        {/* Layout: Phone on right (desktop), above features (mobile) */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-start">
+          {/* Features List */}
+          <div className="space-y-8 mb-12 lg:mb-0">
+            {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <motion.div
@@ -81,6 +87,12 @@ export const Features: React.FC = () => {
               </motion.div>
             );
           })}
+          </div>
+
+          {/* Phone Mockup - Sticky on desktop */}
+          <div className="lg:sticky lg:top-24 flex justify-center lg:justify-end">
+            <PhoneMockup scrollRef={scrollRef} />
+          </div>
         </div>
       </div>
     </section>

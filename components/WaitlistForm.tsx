@@ -21,13 +21,15 @@ const formSchema = z.object({
   referralSource: z.string().optional(),
 });
 
-type FormData = z.infer<typeof formSchema>;
+type FormData = Omit<z.infer<typeof formSchema>, 'deviceType'> & {
+  deviceType: 'ios' | 'android' | undefined;
+};
 
 export const WaitlistForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    deviceType: undefined,
+    deviceType: undefined as 'ios' | 'android' | undefined,
     primaryGoal: '',
     primaryGoalOther: '',
     accountabilityInterest: '',
@@ -223,7 +225,7 @@ export const WaitlistForm: React.FC = () => {
                 { value: 'ios', label: 'iOS (iPhone/iPad)' },
                 { value: 'android', label: 'Android' },
               ]}
-              value={formData.deviceType || ''}
+              value={formData.deviceType}
               onChange={(value) => setFormData({ ...formData, deviceType: value as 'ios' | 'android' })}
               error={errors.deviceType}
               required
