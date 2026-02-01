@@ -1,19 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Unlock, Smartphone } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Logo } from './Logo';
+import { PhoneMockup } from './PhoneMockup';
 
 export const Hero: React.FC = () => {
+  const scrollRef = useRef<HTMLElement>(null);
   const scrollToForm = () => {
     const formSection = document.getElementById('waitlist-form');
     formSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50/40 to-slate-50/40 overflow-hidden">
+    <section ref={scrollRef} className="relative bg-gradient-to-br from-white via-blue-50/40 to-slate-50/40">
       {/* Background decorative elements - inspired by interlocking padlocks */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Blue padlock shape */}
@@ -24,7 +26,7 @@ export const Hero: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-blue-500/10 via-slate-500/10 to-blue-600/10 rounded-full mix-blend-multiply filter blur-2xl opacity-20"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,6 +87,7 @@ export const Hero: React.FC = () => {
             </div>
           </motion.div>
 
+
           {/* Feature highlights */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -126,6 +129,33 @@ export const Hero: React.FC = () => {
               </div>
             </div>
           </motion.div>
+
+          {/* Phone Animation - Right after feature highlights */}
+          {/* Three phones in fan layout with scroll-triggered animations */}
+          <div className="mt-16 mb-8">
+            <PhoneMockup scrollRef={scrollRef} />
+          </div>
+        </motion.div>
+
+        {/* Small scroll spacer for animation - phones animate as user scrolls */}
+        <div className="h-[60vh] w-full"></div>
+
+        {/* Statistics Badge - Positioned after phone animation section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="flex flex-col items-center gap-3 pb-8"
+        >
+          <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-sm">
+            <span className="text-sm text-gray-700">
+              <span className="font-bold text-blue-600">3.8 billion</span> people struggle with phone addiction
+            </span>
+          </div>
+          <div className="text-sm text-gray-500">
+            <span className="font-semibold text-gray-700">71%</span> spend more time on phones than with loved ones
+          </div>
         </motion.div>
       </div>
     </section>

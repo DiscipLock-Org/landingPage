@@ -34,16 +34,28 @@ export async function POST(request: NextRequest) {
     }
 
     // Check for duplicate email
-    const { data: existingUser } = await supabase
+    // Note: .single() returns an error when no rows are found (normal case for new emails)
+    // Error code 'PGRST116' means "no rows returned" - this is expected for new emails
+    const { data: existingUser, error: checkError } = await supabase
       .from('waitlist')
       .select('email')
       .eq('email', email)
       .single();
 
+    // If user exists, return error
     if (existingUser) {
       return NextResponse.json(
         { error: 'This email is already on the waitlist' },
         { status: 409 }
+      );
+    }
+
+    // If error is not "no rows found", it's a real error that should be handled
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Error checking for duplicate email:', checkError);
+      return NextResponse.json(
+        { error: 'Failed to verify email. Please try again.' },
+        { status: 500 }
       );
     }
 

@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Users, BookOpen, TrendingUp } from 'lucide-react';
-import { PhoneMockup } from './PhoneMockup';
 
 const features = [
   {
@@ -37,10 +36,8 @@ const features = [
 ];
 
 export const Features: React.FC = () => {
-  const scrollRef = useRef<HTMLElement>(null);
-
   return (
-    <section ref={scrollRef} className="py-24 bg-white relative">
+    <section className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,12 +55,11 @@ export const Features: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Layout: Phone on right (desktop), above features (mobile) */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-start">
-          {/* Features List */}
-          <div className="space-y-8 mb-12 lg:mb-0">
-            {features.map((feature, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => {
             const Icon = feature.icon;
+            const isAccountability = feature.title === 'Accountability Partner';
+            
             return (
               <motion.div
                 key={feature.title}
@@ -80,19 +76,32 @@ export const Features: React.FC = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed mb-4">
                     {feature.description}
                   </p>
+                  
+                  {/* Research Statistics for Accountability Partner */}
+                  {isAccountability && (
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg p-3">
+                        <div className="text-2xl font-bold text-green-600 mb-1">95%</div>
+                        <p className="text-xs text-gray-700 mb-2">
+                          Success rate with accountability partners
+                        </p>
+                        <p className="text-[10px] text-gray-500">
+                          Research: American Society for Training and Development
+                        </p>
+                      </div>
+                      <div className="mt-2 text-xs text-gray-600">
+                        <p>• 76% completion with weekly reports</p>
+                        <p>• 66% maintain behavior with support</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             );
           })}
-          </div>
-
-          {/* Phone Mockup - Sticky on desktop */}
-          <div className="lg:sticky lg:top-24 flex justify-center lg:justify-end">
-            <PhoneMockup scrollRef={scrollRef} />
-          </div>
         </div>
       </div>
     </section>

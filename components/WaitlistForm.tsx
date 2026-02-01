@@ -55,12 +55,13 @@ export const WaitlistForm: React.FC = () => {
       });
 
       // Prepare submission data
+      // Use formData.primaryGoal (not validatedData.primaryGoal) because validation transforms 'other' to undefined
       const submissionData = {
         name: validatedData.name,
         email: validatedData.email,
         device_type: validatedData.deviceType,
-        primary_goal: validatedData.primaryGoal === 'other' 
-          ? `custom:${validatedData.primaryGoalOther}` 
+        primary_goal: formData.primaryGoal === 'other' 
+          ? `custom:${validatedData.primaryGoalOther || ''}` 
           : validatedData.primaryGoal || null,
         accountability_interest: validatedData.accountabilityInterest || null,
         referral_source: validatedData.referralSource || null,

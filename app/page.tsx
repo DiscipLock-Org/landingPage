@@ -1,6 +1,8 @@
 import { Hero } from '@/components/Hero';
+import { ProblemSection } from '@/components/ProblemSection';
 import { Features } from '@/components/Features';
 import { WaitlistForm } from '@/components/WaitlistForm';
+import { Citations } from '@/components/Citations';
 import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/Button';
 
@@ -23,6 +25,9 @@ export default function Home() {
 
       {/* Hero Section */}
       <Hero />
+
+      {/* Problem Section */}
+      <ProblemSection />
 
       {/* Features Section */}
       <Features />
@@ -79,6 +84,9 @@ export default function Home() {
 
       {/* Waitlist Form */}
       <WaitlistForm />
+
+      {/* Research Citations */}
+      <Citations />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300 py-12">
