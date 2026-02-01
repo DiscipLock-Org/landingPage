@@ -1,13 +1,34 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Unlock, Smartphone } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Logo } from './Logo';
 import { PhoneMockup } from './PhoneMockup';
 
 export const Hero: React.FC = () => {
+  const distractionWords = ['Distractions', 'Procrastination', 'Excuses'];
+  const focusWords = ['Focus', 'Discipline', 'Productivity'];
+  
+  const [distractionIndex, setDistractionIndex] = useState(0);
+  const [focusIndex, setFocusIndex] = useState(0);
+
+  useEffect(() => {
+    const distractionInterval = setInterval(() => {
+      setDistractionIndex((prev) => (prev + 1) % distractionWords.length);
+    }, 3000);
+
+    const focusInterval = setInterval(() => {
+      setFocusIndex((prev) => (prev + 1) % focusWords.length);
+    }, 3000);
+
+    return () => {
+      clearInterval(distractionInterval);
+      clearInterval(focusInterval);
+    };
+  }, [distractionWords.length, focusWords.length]);
+
   const scrollToForm = () => {
     const formSection = document.getElementById('waitlist-form');
     formSection?.scrollIntoView({ behavior: 'smooth' });
@@ -47,12 +68,50 @@ export const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
           >
-            <span className="block bg-gradient-to-r from-blue-600 via-blue-700 to-slate-700 bg-clip-text text-transparent">
-              Lock Distraction,
-            </span>
-            <span className="block bg-gradient-to-r from-slate-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">
-              Unlock Focus
-            </span>
+            <div className="flex items-start justify-start gap-6">
+              <span className="bg-gradient-to-r from-blue-600 via-blue-700 to-slate-700 bg-clip-text text-transparent whitespace-nowrap">
+                Lock
+              </span>
+              <span className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-slate-700 bg-clip-text text-transparent w-[300px] md:w-[360px] lg:w-[420px] inline-block min-h-[1.2em]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={distractionWords[distractionIndex]}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ 
+                      duration: 2,
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
+                    className="inline-block"
+                  >
+                    {distractionWords[distractionIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </div>
+            <div className="flex items-start justify-start gap-6">
+              <span className="bg-gradient-to-r from-slate-600 via-blue-600 to-blue-700 bg-clip-text text-transparent whitespace-nowrap">
+                Unlock
+              </span>
+              <span className="relative bg-gradient-to-r from-slate-600 via-blue-600 to-blue-700 bg-clip-text text-transparent w-[300px] md:w-[360px] lg:w-[420px] inline-block min-h-[1.2em]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={focusWords[focusIndex]}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ 
+                      duration: 2,
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
+                    className="inline-block"
+                  >
+                    {focusWords[focusIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </div>
           </motion.h1>
 
           <motion.p
