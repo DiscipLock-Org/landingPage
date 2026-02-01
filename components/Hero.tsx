@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Unlock, Smartphone } from 'lucide-react';
 import { Button } from './ui/Button';
@@ -8,14 +8,13 @@ import { Logo } from './Logo';
 import { PhoneMockup } from './PhoneMockup';
 
 export const Hero: React.FC = () => {
-  const scrollRef = useRef<HTMLElement>(null);
   const scrollToForm = () => {
     const formSection = document.getElementById('waitlist-form');
     formSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section ref={scrollRef} className="relative bg-gradient-to-br from-white via-blue-50/40 to-slate-50/40">
+    <section className="relative bg-gradient-to-br from-white via-blue-50/40 to-slate-50/40">
       {/* Background decorative elements - inspired by interlocking padlocks */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Blue padlock shape */}
@@ -49,10 +48,10 @@ export const Hero: React.FC = () => {
             className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
           >
             <span className="block bg-gradient-to-r from-blue-600 via-blue-700 to-slate-700 bg-clip-text text-transparent">
-              Lock Your Distractions.
+              Lock Distraction,
             </span>
             <span className="block bg-gradient-to-r from-slate-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">
-              Unlock Your Focus.
+              Unlock Focus
             </span>
           </motion.h1>
 
@@ -130,15 +129,11 @@ export const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Phone Animation - Right after feature highlights */}
-          {/* Three phones in fan layout with scroll-triggered animations */}
+          {/* Phone Carousel - Right after feature highlights */}
           <div className="mt-16 mb-8">
-            <PhoneMockup scrollRef={scrollRef} />
+            <PhoneMockup />
           </div>
         </motion.div>
-
-        {/* Small scroll spacer for animation - phones animate as user scrolls */}
-        <div className="h-[60vh] w-full"></div>
 
         {/* Statistics Badge - Positioned after phone animation section */}
         <motion.div
@@ -148,13 +143,23 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.9 }}
           className="flex flex-col items-center gap-3 pb-8"
         >
-          <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-sm">
-            <span className="text-sm text-gray-700">
-              <span className="font-bold text-blue-600">3.8 billion</span> people struggle with phone addiction
-            </span>
+          <div className="flex flex-col items-center gap-1">
+            <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-sm">
+              <span className="text-sm text-gray-700">
+                <span className="font-bold text-blue-600">3.8 billion</span> people struggle with phone addiction
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 italic">
+              Source: Global smartphone addiction research
+            </p>
           </div>
-          <div className="text-sm text-gray-500">
-            <span className="font-semibold text-gray-700">71%</span> spend more time on phones than with loved ones
+          <div className="flex flex-col items-center gap-1">
+            <div className="text-sm text-gray-500">
+              <span className="font-semibold text-gray-700">71%</span> spend more time on phones than with loved ones
+            </div>
+            <p className="text-xs text-gray-500 italic">
+              Source: Social media usage studies
+            </p>
           </div>
         </motion.div>
       </div>

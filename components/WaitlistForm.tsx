@@ -120,7 +120,6 @@ export const WaitlistForm: React.FC = () => {
 
   const accountabilityOptions = [
     { value: 'yes', label: 'Yes, I\'m interested' },
-    { value: 'maybe', label: 'Maybe, tell me more' },
     { value: 'no', label: 'No, not interested' },
   ];
 

@@ -1,5 +1,4 @@
 import { Hero } from '@/components/Hero';
-import { ProblemSection } from '@/components/ProblemSection';
 import { Features } from '@/components/Features';
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { Citations } from '@/components/Citations';
@@ -25,9 +24,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <Hero />
-
-      {/* Problem Section */}
-      <ProblemSection />
 
       {/* Features Section */}
       <Features />
