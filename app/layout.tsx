@@ -17,6 +17,15 @@ export const metadata: Metadata = {
     description: "Transform your focus with accountability and meaningful gates.",
     type: "website",
   },
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+    other: {
+      rel: 'apple-touch-icon-precomposed',
+      url: '/logo.png',
+    },
+  },
 };
 
 export default function RootLayout({
