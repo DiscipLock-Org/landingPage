@@ -15,32 +15,23 @@ export const Logo: React.FC<LogoProps> = ({
   size = 'md' 
 }) => {
   const sizeClasses = {
-    sm: 'h-8 w-8',
-    md: 'h-12 w-12',
-    lg: 'h-16 w-16',
-  };
-
-  const textSizes = {
-    sm: 'text-xl',
-    md: 'text-2xl',
-    lg: 'text-3xl',
+    sm: 'h-12 w-12',
+    md: 'h-20 w-20',
+    lg: 'h-32 w-32',
   };
 
   return (
-    <div className={`flex items-center space-x-3 ${className}`}>
+    <div className={`flex items-center justify-center ${className}`}>
       <div className={`relative ${sizeClasses[size]} flex-shrink-0`}>
         <Image
           src="/logo.png"
           alt="Disciplock Logo"
-          width={size === 'sm' ? 32 : size === 'md' ? 48 : 64}
-          height={size === 'sm' ? 32 : size === 'md' ? 48 : 64}
+          width={size === 'sm' ? 48 : size === 'md' ? 80 : 120}
+          height={size === 'sm' ? 48 : size === 'md' ? 80 : 120}
           className="object-contain"
           priority
         />
       </div>
-      <span className={`font-bold ${textSizes[size]} ${dark ? 'text-white' : 'bg-gradient-to-r from-blue-600 via-blue-700 to-slate-700 bg-clip-text text-transparent'}`}>
-        Disciplock
-      </span>
     </div>
   );
 };

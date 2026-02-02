@@ -44,12 +44,12 @@ export const Citations: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50 border-t border-gray-200">
+    <section className="py-16 bg-gray-900 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+        <h3 className="text-2xl font-bold text-gray-100 mb-6 text-center">
           Research Citations
         </h3>
-        <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+        <p className="text-gray-300 text-center mb-8 max-w-2xl mx-auto">
           All statistics and claims on this page are backed by peer-reviewed research and studies.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -59,16 +59,16 @@ export const Citations: React.FC = () => {
               href={citation.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white rounded-lg p-4 border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 group"
+              className="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-blue-500 hover:shadow-md transition-all duration-200 group"
             >
               <div className="flex items-start justify-between mb-2">
-                <h4 className="font-semibold text-gray-900 text-sm group-hover:text-blue-600 transition-colors">
+                <h4 className="font-semibold text-gray-100 text-sm group-hover:text-blue-400 transition-colors">
                   {citation.title}
                 </h4>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-600 flex-shrink-0 ml-2" />
+                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400 flex-shrink-0 ml-2" />
               </div>
-              <p className="text-xs text-gray-500 mb-1">{citation.source}</p>
-              <p className="text-xs text-gray-600">{citation.description}</p>
+              <p className="text-xs text-gray-400 mb-1">{citation.source}</p>
+              <p className="text-xs text-gray-300">{citation.description}</p>
             </a>
           ))}
         </div>

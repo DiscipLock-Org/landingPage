@@ -37,7 +37,7 @@ const features = [
 
 export const Features: React.FC = () => {
   return (
-    <section className="py-24 bg-white relative">
+    <section className="py-12 bg-gray-950 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,10 +46,10 @@ export const Features: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
             Everything You Need to Stay Focused
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Disciplock combines app blocking, meaningful gates, and social accountability
             to help you build lasting discipline.
           </p>
@@ -69,30 +69,30 @@ export const Features: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                <div className={`bg-white p-6 rounded-2xl border ${feature.borderColor} hover:border-blue-400 hover:shadow-xl transition-all duration-300 h-full group-hover:bg-gradient-to-br group-hover:from-blue-50/50 group-hover:to-slate-50/50`}>
+                <div className={`bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-blue-500 hover:shadow-xl transition-all duration-300 h-full group-hover:bg-gradient-to-br group-hover:from-gray-800/80 group-hover:to-gray-900/80`}>
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold text-gray-100 mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <p className="text-gray-300 leading-relaxed mb-4">
                     {feature.description}
                   </p>
                   
                   {/* Research Statistics for Accountability Partner */}
                   {isAccountability && (
-                    <div className="mt-4 pt-4 border-t border-gray-200">
-                      <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg p-3">
-                        <div className="text-2xl font-bold text-green-600 mb-1">95%</div>
-                        <p className="text-xs text-gray-700 mb-2">
+                    <div className="mt-4 pt-4 border-t border-gray-700">
+                      <div className="bg-gradient-to-br from-green-900/30 to-blue-900/30 rounded-lg p-3 border border-gray-700">
+                        <div className="text-2xl font-bold text-green-400 mb-1">95%</div>
+                        <p className="text-xs text-gray-200 mb-2">
                           Success rate with accountability partners
                         </p>
-                        <p className="text-[10px] text-gray-500">
+                        <p className="text-[10px] text-gray-400">
                           Research: American Society for Training and Development
                         </p>
                       </div>
-                      <div className="mt-2 text-xs text-gray-600">
+                      <div className="mt-2 text-xs text-gray-300">
                         <p>• 76% completion with weekly reports</p>
                         <p>• 66% maintain behavior with support</p>
                       </div>

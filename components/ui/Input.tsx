@@ -21,10 +21,10 @@ export const Input: React.FC<InputProps> = ({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-sm font-medium text-gray-200 mb-2"
         >
           {label}
-          {props.required && <span className="text-red-500 ml-1">*</span>}
+          {props.required && <span className="text-red-400 ml-1">*</span>}
         </label>
       )}
       <input
@@ -33,18 +33,18 @@ export const Input: React.FC<InputProps> = ({
           w-full px-4 py-3 rounded-lg border transition-colors
           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
           ${error 
-            ? 'border-red-300 bg-red-50' 
-            : 'border-gray-300 bg-white hover:border-blue-300'
+            ? 'border-red-500 bg-red-900/20 text-gray-100' 
+            : 'border-gray-700 bg-gray-800 text-gray-100 hover:border-blue-500 placeholder:text-gray-500'
           }
           ${className}
         `}
         {...props}
       />
       {error && (
-        <p className="mt-1 text-sm text-red-600">{error}</p>
+        <p className="mt-1 text-sm text-red-400">{error}</p>
       )}
       {helperText && !error && (
-        <p className="mt-1 text-sm text-gray-500">{helperText}</p>
+        <p className="mt-1 text-sm text-gray-400">{helperText}</p>
       )}
     </div>
   );

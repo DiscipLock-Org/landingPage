@@ -135,7 +135,7 @@ export const WaitlistForm: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center"
+        className="max-w-2xl mx-auto bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 text-center border border-gray-700"
       >
         <motion.div
           initial={{ scale: 0 }}
@@ -143,15 +143,15 @@ export const WaitlistForm: React.FC = () => {
           transition={{ delay: 0.2, type: 'spring' }}
           className="mb-6"
         >
-          <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
+          <CheckCircle2 className="w-16 h-16 text-green-400 mx-auto" />
         </motion.div>
-        <h3 className="text-3xl font-bold text-gray-900 mb-4">
+        <h3 className="text-3xl font-bold text-gray-100 mb-4">
           You're on the list! 🎉
         </h3>
-        <p className="text-lg text-gray-600 mb-6">
+        <p className="text-lg text-gray-300 mb-6">
           Thank you for joining the Disciplock waitlist. We've sent a confirmation email to your inbox.
         </p>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-400">
           We'll notify you as soon as the app is available for {formData.deviceType === 'ios' ? 'iOS' : 'Android'}.
         </p>
         <Button
@@ -166,7 +166,7 @@ export const WaitlistForm: React.FC = () => {
   }
 
   return (
-    <section id="waitlist-form" className="py-24 bg-gradient-to-br from-blue-50/60 via-slate-50/40 to-blue-50/60">
+    <section id="waitlist-form" className="py-24 bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -175,10 +175,10 @@ export const WaitlistForm: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
             Be Among the First to Transform Your Focus
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-300">
             Join the waitlist and get early access when we launch
           </p>
         </motion.div>
@@ -188,12 +188,12 @@ export const WaitlistForm: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-xl p-8 md:p-12"
+          className="bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 border border-gray-700"
         >
           {errorMessage && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start space-x-3">
-              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-600">{errorMessage}</p>
+            <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-lg flex items-start space-x-3">
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-red-400">{errorMessage}</p>
             </div>
           )}
 
@@ -284,7 +284,7 @@ export const WaitlistForm: React.FC = () => {
               </Button>
             </div>
 
-            <p className="text-xs text-gray-500 text-center mt-4">
+            <p className="text-xs text-gray-400 text-center mt-4">
               By submitting this form, you agree to receive updates about Disciplock.
               We respect your privacy and will never share your information.
             </p>
