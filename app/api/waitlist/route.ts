@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@/lib/neon';
-import { apiInstance } from '@/lib/brevo';
+import { sendBrevoEmail } from '@/lib/brevo';
 import { ThankYouEmail } from '@/emails/thank-you';
 
 export async function POST(request: NextRequest) {
@@ -69,26 +69,14 @@ export async function POST(request: NextRequest) {
           deviceType: device_type,
         });
 
-        // Parse the from email (format: "Name <email@domain.com>" or just "email@domain.com")
-        const fromEmail = process.env.BREVO_FROM_EMAIL || 'Disciplock <noreply@smtp-relay.brevo.com>';
-        const fromMatch = fromEmail.match(/^(.+?)\s*<(.+?)>$|^(.+)$/);
-        const senderName = fromMatch?.[1]?.trim() || fromMatch?.[3]?.split('@')[0] || 'Disciplock';
-        const senderEmail = fromMatch?.[2]?.trim() || fromMatch?.[3]?.trim() || 'noreply@smtp-relay.brevo.com';
-
-        await apiInstance.sendTransacEmail({
-          sender: {
-            name: senderName,
-            email: senderEmail,
+        await sendBrevoEmail(
+          {
+            email: email,
+            name: name,
           },
-          to: [
-            {
-              email: email,
-              name: name,
-            },
-          ],
-          subject: "Welcome to Disciplock - You're on the waitlist! 🎯",
-          htmlContent: emailHtml,
-        });
+          "Welcome to Disciplock - You're on the waitlist! 🎯",
+          emailHtml
+        );
       } catch (emailError) {
         // Log email error but don't fail the request
         console.error('Email sending error:', emailError);

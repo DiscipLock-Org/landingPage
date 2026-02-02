@@ -148,19 +148,9 @@ export const WaitlistForm: React.FC = () => {
         <h3 className="text-3xl font-bold text-gray-100 mb-4">
           You're on the list! 🎉
         </h3>
-        <p className="text-lg text-gray-300 mb-6">
+        <p className="text-lg text-gray-300">
           Thank you for joining the Disciplock waitlist. We've sent a confirmation email to your inbox.
         </p>
-        <p className="text-sm text-gray-400">
-          We'll notify you as soon as the app is available for {formData.deviceType === 'ios' ? 'iOS' : 'Android'}.
-        </p>
-        <Button
-          onClick={() => setSubmitStatus('idle')}
-          variant="outline"
-          className="mt-6"
-        >
-          Submit Another
-        </Button>
       </motion.div>
     );
   }

@@ -18,13 +18,28 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/logo.png',
-    },
+    icon: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '64x64', type: 'image/png' },
+      { url: '/logo.png', sizes: '96x96', type: 'image/png' },
+      { url: '/logo.png', sizes: '128x128', type: 'image/png' },
+      { url: '/logo.png', sizes: '192x192', type: 'image/png' },
+      { url: '/logo.png', sizes: '256x256', type: 'image/png' },
+    ],
+    shortcut: [
+      { url: '/logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo.png', sizes: '64x64', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/logo.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      {
+        rel: 'apple-touch-icon-precomposed',
+        url: '/logo.png',
+        sizes: '180x180',
+      },
+    ],
   },
 };
 
