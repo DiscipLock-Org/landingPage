@@ -74,7 +74,7 @@ export function ThankYouEmail({ name, deviceType }: ThankYouEmailProps): string 
               </div>
               
               <p style="margin: 30px 0 0; color: #9ca3af; font-size: 14px; line-height: 1.6;">
-                Have questions? Just reply to this email—we'd love to hear from you!
+                Have questions? Contact us at <a href="mailto:support@disciplock.app" style="color: #60a5fa; text-decoration: underline;">support@disciplock.app</a>
               </p>
             </td>
           </tr>
