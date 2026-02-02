@@ -89,7 +89,7 @@ export default function PrivacyPolicy() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-100 mb-4">4. Data Storage and Security</h2>
             <p className="text-gray-300 mb-4">
-              Your information is stored securely using Supabase, a trusted cloud database service. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+              Your information is stored securely using Neon, a trusted serverless Postgres database service. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
             </p>
             <p className="text-gray-300 mb-4">
               However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your information, we cannot guarantee absolute security.
@@ -117,7 +117,7 @@ export default function PrivacyPolicy() {
               We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
             </p>
             <ul className="list-disc pl-6 text-gray-300 mb-4 space-y-2">
-              <li><strong>Service Providers:</strong> With trusted third-party service providers who assist us in operating our website and conducting our business (e.g., Supabase for data storage, Resend for email delivery)</li>
+              <li><strong>Service Providers:</strong> With trusted third-party service providers who assist us in operating our website and conducting our business (e.g., Neon for data storage, Resend for email delivery)</li>
               <li><strong>Legal Requirements:</strong> When required by law or to protect our rights, property, or safety</li>
               <li><strong>Business Transfers:</strong> In connection with any merger, sale of assets, or acquisition of all or a portion of our business</li>
             </ul>

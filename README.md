@@ -6,7 +6,7 @@ A professional, conversion-optimized landing page for Disciplock - a focus and a
 
 - **Modern UI/UX**: Professional design with smooth animations and micro-interactions
 - **Waitlist Form**: Comprehensive signup form collecting user information
-- **Supabase Integration**: Stores waitlist signups in Supabase database
+- **Neon Integration**: Stores waitlist signups in Neon (serverless Postgres) database
 - **Email Notifications**: Sends thank-you emails via Resend when users sign up
 - **Responsive Design**: Fully responsive, mobile-first design
 - **Accessibility**: WCAG 2.1 AA compliant
@@ -15,7 +15,7 @@ A professional, conversion-optimized landing page for Disciplock - a focus and a
 
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
-- **Backend**: Supabase (database)
+- **Backend**: Neon (serverless Postgres database)
 - **Email**: Resend (transactional emails)
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
@@ -26,7 +26,7 @@ A professional, conversion-optimized landing page for Disciplock - a focus and a
 ### Prerequisites
 
 - Node.js 18+ and npm/yarn/pnpm
-- A Supabase account and project
+- A Neon account and project
 - A Resend account and API key
 
 ### Installation
@@ -46,18 +46,17 @@ pnpm install
 Create a `.env.local` file in the root directory with the following variables:
 
 ```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Neon Database Configuration
+DATABASE_URL=postgresql://user:password@host/database?sslmode=require
 
 # Resend Configuration
 RESEND_API_KEY=your_resend_api_key
 RESEND_FROM_EMAIL=Disciplock <noreply@yourdomain.com>
 ```
 
-3. Set up Supabase database:
+3. Set up Neon database:
 
-Run the following SQL in your Supabase SQL editor to create the waitlist table:
+Run the following SQL in your Neon SQL editor to create the waitlist table:
 
 ```sql
 CREATE TABLE waitlist (
@@ -74,22 +73,6 @@ CREATE TABLE waitlist (
 
 CREATE INDEX idx_waitlist_email ON waitlist(email);
 CREATE INDEX idx_waitlist_created_at ON waitlist(created_at);
-
--- Enable Row Level Security (RLS)
-ALTER TABLE waitlist ENABLE ROW LEVEL SECURITY;
-
--- Create a policy that allows inserts (for the API)
-CREATE POLICY "Allow public inserts" ON waitlist
-  FOR INSERT
-  TO public
-  WITH CHECK (true);
-
--- Create a policy that allows service role to read (for admin purposes)
--- Note: This uses the service role key, not the anon key
-CREATE POLICY "Allow service role reads" ON waitlist
-  FOR SELECT
-  TO service_role
-  USING (true);
 ```
 
 4. Configure Resend:
@@ -119,7 +102,7 @@ landingPage/
 │   ├── page.tsx             # Main landing page
 │   ├── api/
 │   │   └── waitlist/
-│   │       └── route.ts     # API route for Supabase integration
+│   │       └── route.ts     # API route for Neon database integration
 │   └── globals.css          # Global styles + Tailwind
 ├── components/
 │   ├── Hero.tsx             # Hero section with headline
@@ -132,7 +115,7 @@ landingPage/
 │       ├── Select.tsx
 │       └── RadioGroup.tsx
 ├── lib/
-│   ├── supabase.ts          # Supabase client configuration
+│   ├── neon.ts              # Neon database client configuration
 │   └── resend.ts            # Resend email client configuration
 ├── emails/
 │   └── thank-you.tsx        # Thank-you email template

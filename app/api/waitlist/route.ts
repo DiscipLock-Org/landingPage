@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
-import { resend } from '@/lib/resend';
+import { sql } from '@/lib/neon';
+import { apiInstance } from '@/lib/brevo';
 import { ThankYouEmail } from '@/emails/thank-you';
 
 export async function POST(request: NextRequest) {
@@ -34,24 +34,19 @@ export async function POST(request: NextRequest) {
     }
 
     // Check for duplicate email
-    // Note: .single() returns an error when no rows are found (normal case for new emails)
-    // Error code 'PGRST116' means "no rows returned" - this is expected for new emails
-    const { data: existingUser, error: checkError } = await supabase
-      .from('waitlist')
-      .select('email')
-      .eq('email', email)
-      .single();
+    try {
+      const existingUser = await sql`
+        SELECT email FROM waitlist WHERE email = ${email} LIMIT 1
+      `;
 
-    // If user exists, return error
-    if (existingUser) {
-      return NextResponse.json(
-        { error: 'This email is already on the waitlist' },
-        { status: 409 }
-      );
-    }
-
-    // If error is not "no rows found", it's a real error that should be handled
-    if (checkError && checkError.code !== 'PGRST116') {
+      // If user exists, return error
+      if (existingUser && existingUser.length > 0) {
+        return NextResponse.json(
+          { error: 'This email is already on the waitlist' },
+          { status: 409 }
+        );
+      }
+    } catch (checkError: any) {
       console.error('Error checking for duplicate email:', checkError);
       return NextResponse.json(
         { error: 'Failed to verify email. Please try again.' },
@@ -59,54 +54,69 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Insert into Supabase
-    const { data, error: supabaseError } = await supabase
-      .from('waitlist')
-      .insert({
-        name,
-        email,
-        device_type,
-        primary_goal: primary_goal || null,
-        accountability_interest: accountability_interest || null,
-        referral_source: referral_source || null,
-      })
-      .select()
-      .single();
+    // Insert into Neon database
+    try {
+      const data = await sql`
+        INSERT INTO waitlist (name, email, device_type, primary_goal, accountability_interest, referral_source)
+        VALUES (${name}, ${email}, ${device_type}, ${primary_goal || null}, ${accountability_interest || null}, ${referral_source || null})
+        RETURNING *
+      `;
 
-    if (supabaseError) {
-      console.error('Supabase error:', supabaseError);
+      // Send thank-you email (don't block on this)
+      try {
+        const emailHtml = ThankYouEmail({
+          name,
+          deviceType: device_type,
+        });
+
+        // Parse the from email (format: "Name <email@domain.com>" or just "email@domain.com")
+        const fromEmail = process.env.BREVO_FROM_EMAIL || 'Disciplock <noreply@smtp-relay.brevo.com>';
+        const fromMatch = fromEmail.match(/^(.+?)\s*<(.+?)>$|^(.+)$/);
+        const senderName = fromMatch?.[1]?.trim() || fromMatch?.[3]?.split('@')[0] || 'Disciplock';
+        const senderEmail = fromMatch?.[2]?.trim() || fromMatch?.[3]?.trim() || 'noreply@smtp-relay.brevo.com';
+
+        await apiInstance.sendTransacEmail({
+          sender: {
+            name: senderName,
+            email: senderEmail,
+          },
+          to: [
+            {
+              email: email,
+              name: name,
+            },
+          ],
+          subject: "Welcome to Disciplock - You're on the waitlist! 🎯",
+          htmlContent: emailHtml,
+        });
+      } catch (emailError) {
+        // Log email error but don't fail the request
+        console.error('Email sending error:', emailError);
+        // Continue - the signup was successful even if email fails
+      }
+
+      return NextResponse.json(
+        { 
+          message: 'Successfully added to waitlist',
+          data: data[0]
+        },
+        { status: 201 }
+      );
+    } catch (dbError: any) {
+      // Handle unique constraint violation (duplicate email)
+      if (dbError.code === '23505') {
+        return NextResponse.json(
+          { error: 'This email is already on the waitlist' },
+          { status: 409 }
+        );
+      }
+
+      console.error('Database error:', dbError);
       return NextResponse.json(
         { error: 'Failed to save your information. Please try again.' },
         { status: 500 }
       );
     }
-
-    // Send thank-you email (don't block on this)
-    try {
-      const emailHtml = ThankYouEmail({
-        name,
-        deviceType: device_type,
-      });
-
-      await resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || 'Disciplock <onboarding@resend.dev>',
-        to: email,
-        subject: "Welcome to Disciplock - You're on the waitlist! 🎯",
-        html: emailHtml,
-      });
-    } catch (emailError) {
-      // Log email error but don't fail the request
-      console.error('Email sending error:', emailError);
-      // Continue - the signup was successful even if email fails
-    }
-
-    return NextResponse.json(
-      { 
-        message: 'Successfully added to waitlist',
-        data 
-      },
-      { status: 201 }
-    );
   } catch (error) {
     console.error('Unexpected error:', error);
     return NextResponse.json(

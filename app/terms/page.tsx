@@ -140,7 +140,7 @@ export default function TermsAndConditions() {
               Our services may integrate with or use third-party services, including:
             </p>
             <ul className="list-disc pl-6 text-gray-300 mb-4 space-y-2">
-              <li><strong>Supabase:</strong> For data storage and management</li>
+              <li><strong>Neon:</strong> For data storage and management (serverless Postgres database)</li>
               <li><strong>Resend:</strong> For email delivery</li>
             </ul>
             <p className="text-gray-300">

@@ -4,7 +4,7 @@ Follow these steps to get your Disciplock landing page up and running:
 
 ## ✅ Prerequisites
 - [ ] Node.js 18+ installed
-- [ ] Supabase account created
+- [ ] Neon account created
 - [ ] Resend account created
 
 ## ✅ Installation Steps
@@ -14,13 +14,13 @@ Follow these steps to get your Disciplock landing page up and running:
 npm install
 ```
 
-### 2. Set Up Supabase
-- [ ] Create a new Supabase project
-- [ ] Go to SQL Editor in Supabase dashboard
-- [ ] Copy and paste the contents of `supabase-setup.sql`
+### 2. Set Up Neon
+- [ ] Create a new Neon project at https://neon.tech
+- [ ] Go to SQL Editor in Neon dashboard
+- [ ] Copy and paste the contents of `neon-setup.sql`
 - [ ] Run the SQL script
-- [ ] Go to Settings > API
-- [ ] Copy your Project URL and anon/public key
+- [ ] Go to Connection Details
+- [ ] Copy your connection string (DATABASE_URL)
 
 ### 3. Set Up Resend
 - [ ] Sign up at https://resend.com
@@ -33,8 +33,7 @@ npm install
 - [ ] Add the following variables:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url_here
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+DATABASE_URL=postgresql://user:password@host/database?sslmode=require
 RESEND_API_KEY=your_resend_api_key_here
 RESEND_FROM_EMAIL=Disciplock <noreply@yourdomain.com>
 ```
@@ -52,7 +51,7 @@ npm run dev
 ### 6. Test the Landing Page
 - [ ] Open http://localhost:3000
 - [ ] Test the waitlist form submission
-- [ ] Verify data appears in Supabase dashboard
+- [ ] Verify data appears in Neon dashboard
 - [ ] Check your email for the thank-you message
 
 ## ✅ Verification Checklist
@@ -63,7 +62,7 @@ npm run dev
 - [ ] Waitlist form is functional
 - [ ] Form validation works (try submitting empty form)
 - [ ] Successful submission shows success message
-- [ ] Data appears in Supabase `waitlist` table
+- [ ] Data appears in Neon `waitlist` table
 - [ ] Thank-you email is received
 
 ## 🚀 Deployment
@@ -90,11 +89,11 @@ When ready to deploy:
 
 ## 🆘 Troubleshooting
 
-**Issue**: "Missing Supabase environment variables"
-- **Solution**: Make sure `.env.local` exists and has all required variables
+**Issue**: "Missing DATABASE_URL environment variable"
+- **Solution**: Make sure `.env.local` exists and has the DATABASE_URL variable set to your Neon connection string
 
 **Issue**: "Failed to save your information"
-- **Solution**: Check Supabase RLS policies are set up correctly (see `supabase-setup.sql`)
+- **Solution**: Check that the waitlist table exists in your Neon database (see `neon-setup.sql`)
 
 **Issue**: Email not received
 - **Solution**: Check Resend dashboard for delivery status, verify API key is correct
