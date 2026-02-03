@@ -90,7 +90,7 @@ export const ProblemSection: React.FC = () => {
           className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-white text-center"
         >
           <h3 className="text-3xl md:text-4xl font-bold mb-4">
-            There's a Better Way
+            There&apos;s a Better Way
           </h3>
           <p className="text-xl md:text-2xl mb-6 opacity-90">
             Research shows that accountability partners increase success rates from 10% to 95%

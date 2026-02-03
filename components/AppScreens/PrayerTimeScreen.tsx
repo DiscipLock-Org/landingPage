@@ -12,7 +12,7 @@ export const PrayerTimeScreen: React.FC = () => {
           <Moon className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
           <span className="text-[10px] sm:text-xs font-medium">Maghrib Prayer</span>
         </div>
-        <h2 className="text-base sm:text-lg font-bold">It's Time to Pray</h2>
+        <h2 className="text-base sm:text-lg font-bold">It&apos;s Time to Pray</h2>
         <p className="text-[10px] sm:text-xs opacity-90 mt-1">Sunset: 6:45 PM</p>
       </div>
 

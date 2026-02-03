@@ -146,10 +146,10 @@ export const WaitlistForm: React.FC = () => {
           <CheckCircle2 className="w-16 h-16 text-green-400 mx-auto" />
         </motion.div>
         <h3 className="text-3xl font-bold text-gray-100 mb-4">
-          You're on the list! 🎉
+          You&apos;re on the list! 🎉
         </h3>
         <p className="text-lg text-gray-300">
-          Thank you for joining the Disciplock waitlist. We've sent a confirmation email to your inbox.
+          Thank you for joining the Disciplock waitlist. We&apos;ve sent a confirmation email to your inbox.
         </p>
       </motion.div>
     );

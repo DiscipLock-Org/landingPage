@@ -23,13 +23,13 @@ export const BibleVerseScreen: React.FC = () => {
               <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Today's Bible Verse</h3>
+              <h3 className="font-bold text-gray-900 text-xs sm:text-sm">Today&apos;s Bible Verse</h3>
               <p className="text-[10px] sm:text-xs text-gray-500">Matthew 6:34</p>
             </div>
           </div>
           
           <p className="text-xs sm:text-sm text-gray-700 leading-relaxed mb-3 sm:mb-4">
-            "Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own."
+            &quot;Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.&quot;
           </p>
 
           <div className="bg-blue-50 rounded-lg p-2 sm:p-3 mb-3 sm:mb-4">
@@ -46,7 +46,7 @@ export const BibleVerseScreen: React.FC = () => {
         </div>
 
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3 text-center shadow-lg">
-          <p className="text-xs sm:text-sm font-semibold">I've read this</p>
+          <p className="text-xs sm:text-sm font-semibold">I&apos;ve read this</p>
         </div>
       </div>
     </div>

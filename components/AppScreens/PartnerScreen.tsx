@@ -34,7 +34,7 @@ export const PartnerScreen: React.FC = () => {
               End Instagram session 5 minutes early
             </p>
             <p className="text-xs text-gray-500">
-              Reason: "Need to check messages"
+              Reason: &quot;Need to check messages&quot;
             </p>
           </div>
 

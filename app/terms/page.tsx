@@ -37,7 +37,7 @@ export default function TermsAndConditions() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-100 mb-4">1. Agreement to Terms</h2>
             <p className="text-gray-300 mb-4">
-              By accessing or using the Disciplock website and joining our waitlist, you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use our services.
+              By accessing or using the Disciplock website and joining our waitlist, you agree to be bound by these Terms and Conditions (&quot;Terms&quot;). If you do not agree to these Terms, please do not use our services.
             </p>
             <p className="text-gray-300">
               We reserve the right to modify these Terms at any time. Your continued use of our services after any such changes constitutes your acceptance of the new Terms.
@@ -101,7 +101,7 @@ export default function TermsAndConditions() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-100 mb-4">6. Disclaimer of Warranties</h2>
             <p className="text-gray-300 mb-4">
-              Our website and services are provided "as is" and "as available" without warranties of any kind, either express or implied, including but not limited to:
+              Our website and services are provided &quot;as is&quot; and &quot;as available&quot; without warranties of any kind, either express or implied, including but not limited to:
             </p>
             <ul className="list-disc pl-6 text-gray-300 mb-4 space-y-2">
               <li>Warranties of merchantability</li>
@@ -130,7 +130,7 @@ export default function TermsAndConditions() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-100 mb-4">8. Indemnification</h2>
             <p className="text-gray-300">
-              You agree to indemnify, defend, and hold harmless Disciplock and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys' fees, arising out of or in any way connected with your use of our services or violation of these Terms.
+              You agree to indemnify, defend, and hold harmless Disciplock and its officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses, including reasonable attorneys&apos; fees, arising out of or in any way connected with your use of our services or violation of these Terms.
             </p>
           </section>
 
@@ -177,7 +177,7 @@ export default function TermsAndConditions() {
               These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions. Any disputes arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts of [Your Jurisdiction].
             </p>
             <p className="text-gray-400 mt-4 text-sm italic">
-              Note: Please replace [Your Jurisdiction] with your actual jurisdiction (e.g., "the State of California, United States" or "England and Wales").
+              Note: Please replace [Your Jurisdiction] with your actual jurisdiction (e.g., &quot;the State of California, United States&quot; or &quot;England and Wales&quot;).
             </p>
           </section>
 

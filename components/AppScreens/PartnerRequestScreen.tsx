@@ -43,7 +43,7 @@ export const PartnerRequestScreen: React.FC = () => {
           <div className="bg-slate-50 rounded-lg p-2 sm:p-3 mb-3 sm:mb-4">
             <p className="text-[10px] sm:text-xs text-gray-600 mb-1">Reason (optional):</p>
             <div className="bg-white rounded p-2 border border-gray-200">
-              <p className="text-[10px] sm:text-xs text-gray-500 italic">"Need to check messages"</p>
+              <p className="text-[10px] sm:text-xs text-gray-500 italic">&quot;Need to check messages&quot;</p>
             </div>
           </div>
 
@@ -62,7 +62,7 @@ export const PartnerRequestScreen: React.FC = () => {
             <Users className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 mr-2" />
             <p className="text-[10px] sm:text-xs text-gray-600 font-medium">Partner: John Doe</p>
           </div>
-          <p className="text-[10px] sm:text-xs text-gray-500">They'll receive a notification</p>
+          <p className="text-[10px] sm:text-xs text-gray-500">They&apos;ll receive a notification</p>
         </div>
       </div>
     </div>
