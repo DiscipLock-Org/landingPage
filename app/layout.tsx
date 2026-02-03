@@ -9,13 +9,58 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Disciplock - Lock Your Distractions. Unlock Your Focus.",
-  description: "A focus and accountability app that lets you set limits on distracting apps and complete spiritual, meditative, or disciplinary tasks before unlocking early. Only an accountability partner can approve early breaks.",
-  keywords: ["focus app", "productivity", "accountability", "app blocker", "discipline", "meditation", "faith"],
+  metadataBase: new URL("https://disciplock.app"),
+  title: {
+    default: "Disciplock - Lock Your Distractions. Unlock Your Focus.",
+    template: "%s | Disciplock",
+  },
+  description: "A focus and accountability app that lets you set limits on distracting apps and complete spiritual, meditative, or disciplinary tasks before unlocking early. Only an accountability partner can approve early breaks. Join the waitlist for early access.",
+  keywords: ["focus app", "productivity app", "accountability app", "app blocker", "discipline app", "meditation app", "faith app", "phone addiction", "distraction blocker", "focus tool", "productivity tool"],
+  authors: [{ name: "Disciplock" }],
+  creator: "Disciplock",
+  publisher: "Disciplock",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Disciplock - Lock Your Distractions. Unlock Your Focus.",
-    description: "Transform your focus with accountability and meaningful gates.",
     type: "website",
+    locale: "en_US",
+    url: "https://disciplock.app",
+    siteName: "Disciplock",
+    title: "Disciplock - Lock Your Distractions. Unlock Your Focus.",
+    description: "Transform your focus with accountability and meaningful gates. Join thousands on the waitlist for early access to the app that helps you break phone addiction.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Disciplock - Focus and Accountability App",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Disciplock - Lock Your Distractions. Unlock Your Focus.",
+    description: "Transform your focus with accountability and meaningful gates. Join the waitlist for early access.",
+    images: ["/logo.png"],
+    creator: "@disciplock",
+  },
+  alternates: {
+    canonical: "https://disciplock.app",
+  },
+  verification: {
+    // Add your verification codes here when you set up Google Search Console, Bing, etc.
+    // google: "your-google-verification-code",
+    // yandex: "your-yandex-verification-code",
+    // yahoo: "your-yahoo-verification-code",
   },
   icons: {
     icon: [

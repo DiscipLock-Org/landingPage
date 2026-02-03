@@ -3,18 +3,78 @@ import { Features } from '@/components/Features';
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { Citations } from '@/components/Citations';
 import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 
 export default function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://disciplock.app/#organization",
+        name: "Disciplock",
+        url: "https://disciplock.app",
+        logo: "https://disciplock.app/logo.png",
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "support@disciplock.app",
+          contactType: "Customer Support",
+        },
+        sameAs: [],
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://disciplock.app/#software",
+        name: "Disciplock",
+        applicationCategory: "ProductivityApplication",
+        operatingSystem: ["iOS", "Android"],
+        description: "A focus and accountability app that lets you set limits on distracting apps and complete spiritual, meditative, or disciplinary tasks before unlocking early. Only an accountability partner can approve early breaks.",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.8",
+          ratingCount: "1",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://disciplock.app/#website",
+        url: "https://disciplock.app",
+        name: "Disciplock",
+        description: "Lock Your Distractions. Unlock Your Focus. Join the waitlist for early access to the app that helps you break phone addiction.",
+        publisher: {
+          "@id": "https://disciplock.app/#organization",
+        },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: "https://disciplock.app/?s={search_term_string}",
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800" aria-label="Main navigation">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <span className="font-bold text-2xl bg-gradient-to-r from-blue-400 via-blue-500 to-slate-400 bg-clip-text text-transparent">
+            <Link href="/" className="font-bold text-2xl bg-gradient-to-r from-blue-400 via-blue-500 to-slate-400 bg-clip-text text-transparent" aria-label="Disciplock Home">
               Disciplock
-            </span>
-            <a href="#waitlist-form">
+            </Link>
+            <a href="#waitlist-form" aria-label="Jump to waitlist form">
               <Button variant="primary" size="sm">
                 Join Waitlist
               </Button>

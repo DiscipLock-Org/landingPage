@@ -1,9 +1,19 @@
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Terms and Conditions - Disciplock',
   description: 'Disciplock Terms and Conditions - Read our terms of service for using the Disciplock waitlist and services.',
+  alternates: {
+    canonical: 'https://disciplock.app/terms',
+  },
+  openGraph: {
+    title: 'Terms and Conditions - Disciplock',
+    description: 'Disciplock Terms and Conditions - Read our terms of service for using the Disciplock waitlist and services.',
+    url: 'https://disciplock.app/terms',
+    type: 'website',
+  },
 };
 
 export default function TermsAndConditions() {

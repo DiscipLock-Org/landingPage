@@ -1,9 +1,19 @@
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Privacy Policy - Disciplock',
   description: 'Disciplock Privacy Policy - Learn how we collect, use, and protect your personal information.',
+  alternates: {
+    canonical: 'https://disciplock.app/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy - Disciplock',
+    description: 'Disciplock Privacy Policy - Learn how we collect, use, and protect your personal information.',
+    url: 'https://disciplock.app/privacy',
+    type: 'website',
+  },
 };
 
 export default function PrivacyPolicy() {
